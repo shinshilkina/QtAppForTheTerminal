@@ -2,6 +2,10 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_QtAppForTheTerminal.h"
+#include <qstring.h>
+#include <QtPrintSupport/qprinter.h>
+#include <QStorageInfo>
+
 
 class QtAppForTheTerminal : public QMainWindow
 {
@@ -12,4 +16,12 @@ public:
 
 private:
 	Ui::QtAppForTheTerminalClass ui;
+	QString filename;
+
+private slots:
+
+	void fopenFileSystem();
+	//void fprintThisFile();
+
+
 };

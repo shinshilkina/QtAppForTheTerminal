@@ -15,12 +15,17 @@ void QtAppForTheTerminal::fopenFileSystem()
 	//-------------определение файла через проводник-----------------
 	//отображение подключенных устройств
 	QStorageInfo storage = QStorageInfo::root();
-	ui.labelFilename->setText(storage.rootPath()+" "+ storage.name());
-
-	
-	//открытие проводника
+	foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes()) {
+		if (storage.isValid() && storage.isReady()) {
+			if (!storage.isReadOnly()) {
+				ui.labelFilename->setText(storage.rootPath());
+				filename = storage.rootPath();
+			}
+		}
+	}
+	//открытие проводника на папке подключенного устройства
 	QPrinter printer;
-	filename = QFileDialog::getOpenFileName(nullptr, "Open File","C:\\", "File(*.pdf *.png *.xpm *.jpg *.txt *.doc *.docx)");
+	filename = QFileDialog::getOpenFileName(nullptr, "Open File", filename, "File(*.pdf *.png *.xpm *.jpg *.txt *.doc *.docx)");
 	
 	//UpdateLabel(filename);
 }

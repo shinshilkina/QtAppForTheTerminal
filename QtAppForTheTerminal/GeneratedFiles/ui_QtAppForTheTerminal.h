@@ -43,7 +43,7 @@ public:
         buttonOpenFile->setGeometry(QRect(440, 60, 121, 28));
         labelFilename = new QLabel(centralWidget);
         labelFilename->setObjectName(QString::fromUtf8("labelFilename"));
-        labelFilename->setGeometry(QRect(30, 60, 391, 16));
+        labelFilename->setGeometry(QRect(30, 60, 391, 171));
         QtAppForTheTerminalClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(QtAppForTheTerminalClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));

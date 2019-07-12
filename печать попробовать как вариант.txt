@@ -1,0 +1,44 @@
+int ret = 0;
+     HANDLE     hPrinter;
+     DOC_INFO_1 DocInfo;
+     DWORD      dwJob;
+     DWORD      dwBytesWritten;
+     LPBYTE lpData;
+     char buffer[4096];
+     DWORD dwCount;
+     FILE* pF;
+ 
+     TCHAR sPrinterName[MAX_PATH] = {0};
+     DWORD Size = MAX_PATH;
+ 
+     GetDefaultPrinter(sPrinterName, &Size);
+    
+     pF = fopen(sFileName, "rb");
+     if (pF)
+     {
+           if( OpenPrinter( sPrinterName, &hPrinter, NULL ) )
+           {
+                DocInfo.pDocName = sFileName;
+                DocInfo.pOutputFile = NULL;
+                DocInfo.pDatatype = "RAW";
+ 
+                if( (dwJob = StartDocPrinter( hPrinter, 1, (LPBYTE)&DocInfo )) != 0 )
+                {
+                      if( StartPagePrinter( hPrinter ) )
+                      {
+                          while( ret = !feof(pF) )
+                          {
+                                dwCount = fread( buffer, sizeof( char ), sizeof( buffer ) / sizeof( char ), pF );
+                                
+                                // lpData = (LPBYTE)buffer; - зачем это зло?!
+                                if (dwCount <= 0) break;
+                                if( !WritePrinter( hPrinter, /* lpData - ф-ция требует указатель на буфер */ &buffer[0] , dwCount, &dwBytesWritten ) ) break;
+                          }
+                          EndPagePrinter( hPrinter );
+                      }
+                      EndDocPrinter( hPrinter );
+                }
+                ClosePrinter( hPrinter );
+           }
+           fclose(pF);
+     }

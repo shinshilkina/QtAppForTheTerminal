@@ -1,0 +1,105 @@
+//HINSTANCE hInstance = ShellExecute(NULL, L"print", L"C:\\Users\\Ася\\Documents\\zayavlenie_na_nir_PI1.pdf", NULL, NULL, SW_HIDE);
+	//int a = 2;
+	//-------печать напрямую к принтеру------------
+
+	/* QPrinter printer;
+
+	QPrintDialog *dialog = new QPrintDialog(&printer, this);
+	dialog->setWindowTitle(tr("Print Document"));
+	if (editor->textCursor().hasSelection())
+		dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+	if (dialog->exec() != QDialog::Accepted)
+		return;  */
+
+
+		//--------блок открытия диалогового окна принтера-----------------
+	
+	/*
+	QPrinter printer;
+	QPrintDialog dialog(&printer);
+	dialog.setWindowTitle(tr("Print Document"));
+	dialog.addEnabledOption(QAbstractPrintDialog::PrintSelection);
+	dialog.exec(); 
+	*/
+	/*
+	QFile file("D:\\kek.html");
+	QString content;
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) 
+		throw("pizdec))");
+	
+	QTextStream in(&file);
+	content = in.readAll();
+	*/
+
+	/*QPrinter printer(QPrinter::HighResolution); //create your QPrinter (don't need to be high resolution, anyway)
+	printer.setPageSize(QPrinter::A4);
+	printer.setOrientation(QPrinter::Portrait);
+	printer.setPageMargins(15, 15, 15, 15, QPrinter::Millimeter);
+	printer.setFullPage(false);
+	printer.setOutputFileName("nonwritable.pdf");
+	printer.setOutputFormat(QPrinter::PdfFormat); //you can use native format of system usin QPrinter::NativeFormat
+	
+	//--------------------------------------------------------------
+	QTextDocument doc;
+	//doc.addResource(QTextDocument::HtmlResource, QUrl("kek.html"));
+	//doc.setPlainText("it's working"); // it's real working yep
+		//doc.setHtml("<h1>Hello, World!</h1>\n<p>Lorem ipsum dolor sit amet, consectitur adipisci elit.</p>"); //yep
+		doc.addResource(QTextDocument::UserResource, QUrl(filename),QVariant()); //nooooooooooooo
+	doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
+	doc.print(&printer);
+	
+	//--------------продолжение верхнего блока стр 58-----------------
+	
+	/*QPainter painter(&printer); // create a painter which will paint 'on printer'.
+	painter.setFont(QFont("Tahoma", 8));
+	//painter.drawText(200, 200, filename);
+	if (!painter.begin(&printer)) { // failed to open file
+		qWarning("failed to open file, is it writable?");
+	}
+
+	painter.end();
+	*/
+	
+	/*
+	QPrinter* pPrinter = new QPrinter(QPrinter::PrinterResolution);
+	QPrintDialog dlg(pPrinter, this);
+	if (dlg.exec()) {
+		QTextDocument doc;
+		doc.setHtml(finalReport);
+		const QRect pageRect = pPrinter->pageRect();
+		doc.setPageSize(pageRect.size());
+		QRect contentRect(QPoint(0, 0), doc.size().toSize());
+		QRect currentRect(0, 0, pageRect.width(), pageRect.height());
+		QPainter painter(pPrinter);
+		while (currentRect.intersects(contentRect)) {
+			painter.save();
+			painter.translate(0, -currentRect.y());
+			doc.drawContents(&painter, currentRect);
+			painter.restore();
+
+			currentRect.translate(0, currentRect.height());
+			if (currentRect.intersects(contentRect)) {
+				pPrinter->newPage();
+			}
+		}
+	}
+	*/
+	/*
+	QString fileNamee = QFileDialog::getSaveFileName((QWidget*)0, "Export file", QString(), "*.pdf");
+	if (QFileInfo(fileNamee).suffix().isEmpty()) { fileNamee.append(".pdf"); }
+
+	QPrinter printer(QPrinter::PrinterResolution);
+	printer.setOutputFormat(QPrinter::PdfFormat);
+	printer.setPaperSize(QPrinter::A4);
+	printer.setOutputFileName(fileNamee);
+
+	QTextDocument doc;
+	//doc.setHtml("<h1>Hello, World!</h1>\n<p>Lorem ipsum dolor sit amet, consectitur adipisci elit.</p>");
+	doc.addResource(QTextDocument::HtmlResource, QUrl(filename),QVariant());
+	doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
+	doc.print(&printer);
+	*/
+//сохранение файла doc в формат pdf
+//Word = CreateObject("Word.Application");
+//Doc = Word.Documents.Open(Path);
+//Doc.ExportAsFixedFormat(Path; 17; openAfterExport; CreateBookmarks) ;
